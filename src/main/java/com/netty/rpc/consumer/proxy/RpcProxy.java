@@ -54,42 +54,53 @@ public class RpcProxy {
 
             //发起网络请求
             EventLoopGroup workgroup = new NioEventLoopGroup();
+            final RpcProxyHandler proxyHandler = new RpcProxyHandler();
 
-            Bootstrap client = new Bootstrap();
-            client.group(workgroup);
-            client.channel(NioSocketChannel.class);
-            client.option(ChannelOption.TCP_NODELAY, true);
-            client.handler(new ChannelInitializer<SocketChannel>() {
+            try {
 
-                @Override
-                protected void initChannel(SocketChannel socketChannel) throws Exception {
-                    ChannelPipeline pipeline = socketChannel.pipeline();
-                    /**
-                     * pipline的处理逻辑如下:
-                     *      1. 处理逻辑的编,解码
-                     *      2.
-                     *      3.
-                     *      4.
-                     *      5.
-                     */
+                Bootstrap client = new Bootstrap();
+                client.group(workgroup);
+                client.channel(NioSocketChannel.class);
+                client.option(ChannelOption.TCP_NODELAY, true);
+                client.handler(new ChannelInitializer<SocketChannel>() {
 
-                    //1. 处理逻辑的编,解码
-                    //TODO:了解一下这个构造器的参数要怎么配置
-                    pipeline.addLast(new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE,0,4,0,4 ));//自定义解码器
-                    pipeline.addLast(new LengthFieldPrepender(4));//自定义编码器
-                    //实参处理
-                    pipeline.addLast("encoder",new ObjectEncoder());
-                    pipeline.addLast("decoder",new ObjectDecoder(Integer.MAX_VALUE, ClassResolvers.cacheDisabled(null)));//禁缓存
+                    @Override
+                    protected void initChannel(SocketChannel socketChannel) throws Exception {
+                        ChannelPipeline pipeline = socketChannel.pipeline();
+                        /**
+                         * pipline的处理逻辑如下:
+                         *      1. 处理逻辑的编,解码
+                         *      2.
+                         *      3.
+                         *      4.
+                         *      5.
+                         */
 
-                    // 前面的编解码，就是完成对数据的解析
-                    // 最后一步，执行属于自己的逻辑
-                    // 这里是把信息发送过去
-                    pipeline.addLast(new RpcProxyHandler());
-                }
-            });
+                        //1. 处理逻辑的编,解码
+                        //TODO:了解一下这个构造器的参数要怎么配置
+                        pipeline.addLast(new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 4, 0, 4));//自定义解码器
+                        pipeline.addLast(new LengthFieldPrepender(4));//自定义编码器
+                        //实参处理
+                        pipeline.addLast("encoder", new ObjectEncoder());
+                        pipeline.addLast("decoder", new ObjectDecoder(Integer.MAX_VALUE, ClassResolvers.cacheDisabled(null)));//禁缓存
 
+                        // 前面的编解码，就是完成对数据的解析
+                        // 最后一步，执行属于自己的逻辑
+                        pipeline.addLast(proxyHandler);
+                    }
+                });
 
-            return null;
+                // 把信息发送过去
+                ChannelFuture future = client.connect("localhost", 8080).sync();
+                future.channel().writeAndFlush(msg).sync();
+                future.channel().closeFuture().sync();
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                workgroup.shutdownGracefully();
+            }
+            //将localhost:8080服务返回的信息返回
+            return proxyHandler.getResponse();
         }
     }
 }
