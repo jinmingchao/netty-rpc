@@ -93,12 +93,13 @@ public class RegistryHandler extends ChannelInboundHandlerAdapter {
         if (registryMap.containsKey(request.getClassName())) {
             Object service = registryMap.get(request.getClassName());
             Method method = service.getClass().getMethod(request.getMethodName(), request.getParams());//形参找方法
-            method.invoke(service, request.getValues());//实参参与调用
+            result = method.invoke(service, request.getValues());//实参参与调用
         }
         // 5. 通过远程调用Provider得到返回结果，并回复给客户端
         ctx.write(result);
         ctx.flush();
         ctx.close();
+        System.out.println("服务端计算结果: " + result);
     }
 
     /**

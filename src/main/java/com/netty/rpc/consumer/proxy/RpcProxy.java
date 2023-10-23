@@ -59,10 +59,10 @@ public class RpcProxy {
             try {
 
                 Bootstrap client = new Bootstrap();
-                client.group(workgroup);
-                client.channel(NioSocketChannel.class);
-                client.option(ChannelOption.TCP_NODELAY, true);
-                client.handler(new ChannelInitializer<SocketChannel>() {
+                client.group(workgroup)
+                      .channel(NioSocketChannel.class)
+                      .option(ChannelOption.TCP_NODELAY, true)
+                      .handler(new ChannelInitializer<SocketChannel>() {
 
                     @Override
                     protected void initChannel(SocketChannel socketChannel) throws Exception {
