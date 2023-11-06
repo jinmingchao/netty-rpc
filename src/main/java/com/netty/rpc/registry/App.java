@@ -12,5 +12,6 @@ public class App {
 //            e.printStackTrace();
 //        }
         new RpcRegistry(8080).start();
+        System.out.println(1);
     }
 }
