@@ -1,0 +1,63 @@
+[33mcommit 0645bf0c75dda54647e700f9eed070f106960e2c[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: jin'ming'chao <441821724@qq.com>
+Date:   Mon Nov 6 17:14:44 2023 +0800
+
+    test2
+
+[33mcommit c508c3a6f96e308fe0f0064c8024cd7ab7403344[m
+Author: jin'ming'chao <441821724@qq.com>
+Date:   Mon Nov 6 17:11:47 2023 +0800
+
+    test1
+
+[33mcommit ac35b7ff980a76946c7a743fc6d869ee8849fbc6[m
+Author: jin'ming'chao <441821724@qq.com>
+Date:   Mon Oct 23 15:06:42 2023 +0800
+
+    20231023-1
+
+[33mcommit 49a137a0321856a997c90ceeb52754e233625e02[m
+Author: jin'ming'chao <441821724@qq.com>
+Date:   Fri Oct 20 17:15:02 2023 +0800
+
+    20231020-2
+
+[33mcommit c422cba41bef3f8165b27b224cda0e2525eb2545[m
+Author: jin'ming'chao <441821724@qq.com>
+Date:   Fri Oct 20 16:54:31 2023 +0800
+
+    20231020-1
+
+[33mcommit 6aa45a2f15f1b6f96d481b06140b547f3c1d0fd3[m
+Merge: 45a611b 01f0210
+Author: jin'ming'chao <441821724@qq.com>
+Date:   Thu Oct 19 16:28:34 2023 +0800
+
+    Merge branch 'master' of https://github.com/jinmingchao/netty-rpc
+    
+     Conflicts:
+    	src/main/java/com/netty/rpc/registry/RegistryHandler.java
+
+[33mcommit 45a611b5cd19533d8f072a3db544eb28326ddd7e[m
+Author: jin'ming'chao <441821724@qq.com>
+Date:   Tue Oct 17 17:22:38 2023 +0800
+
+    20231019-1
+
+[33mcommit 01f021019b4e20e818d76c42b61bd91bf85a7883[m
+Author: jin'ming'chao <441821724@qq.com>
+Date:   Tue Oct 17 17:22:38 2023 +0800
+
+    20231017-1
+
+[33mcommit 3fe0f66d0ca14769f781aa5be56bdcec51fca2ac[m
+Author: jin'ming'chao <441821724@qq.com>
+Date:   Mon Oct 16 16:53:20 2023 +0800
+
+    20231016-2
+
+[33mcommit a239448c7f25b12f0294baedf0a04564be87d1be[m
+Author: jin'ming'chao <441821724@qq.com>
+Date:   Mon Oct 16 15:43:59 2023 +0800
+
+    20231016-1

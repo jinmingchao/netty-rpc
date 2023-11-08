@@ -1,0 +1,1 @@
+1. 关注Netty的三个核心组件，也就是NIO中的Buffer, Selector, Channel
